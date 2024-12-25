@@ -1,0 +1,59 @@
+.footer-icon {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.footer-icon:hover {
+    transform: translateY(-5px);
+    /* حركة طفيفة للأعلى عند المرور */
+}
+
+/* تخصيص ألوان الأيقونات */
+.footer-icon.fab.fa-facebook {
+    color: #3b5998;
+    /* لون الفيسبوك */
+}
+
+.footer-icon.fab.fa-twitter {
+    color: #1da1f2;
+    /* لون التويتر */
+}
+
+.footer-icon.fab.fa-instagram {
+    color: #e4405f;
+    /* لون الإنستغرام */
+}
+
+.footer-icon.fab.fa-linkedin {
+    color: #0077b5;
+    /* لون اللينكدإن */
+}
+
+.footer-icon:hover {
+    color: #007bff;
+    /* اللون عند المرور، اختياري */
+}
+
+/* تخصيص النصوص داخل الفوتر */
+footer p {
+    font-size: 0.9rem;
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+footer p:hover {
+    color: #007bff;
+    /* تغيير اللون عند المرور على النص */
+}
+
+/* إضافة تنسيق الروابط */
+footer a {
+    font-size: 1rem;
+    text-decoration: none;
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #007bff;
+}

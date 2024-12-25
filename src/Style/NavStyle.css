@@ -1,0 +1,105 @@
+/* ستايل الزر بشكل عام */
+.btn {
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -ms-border-radius: 0px;
+    -o-border-radius: 0px;
+}
+
+/* ستايل اللوجو في الـ Navbar */
+.navbar-brand {
+    font-size: 1.8rem;
+    /* تكبير حجم الخط */
+    font-weight: bold;
+    /* جعل الخط عريض */
+    letter-spacing: 2px;
+    /* مسافة بين الحروف */
+    color: #4CAF50;
+    /* لون جذاب ومتناسق مع تصميم المتجر */
+    text-transform: uppercase;
+    /* جعل النص بأحرف كبيرة */
+    transition: all 0.3s ease;
+    /* تأثير انتقالي عند التفاعل مع اللوجو */
+    padding: 5px 15px;
+    /* إضافة مسافة حول النص */
+}
+
+.navbar-brand:hover {
+    color: #fff;
+    /* تغيير اللون عند المرور بالفأرة */
+    background-color: #4CAF50;
+    /* تغيير الخلفية عند المرور */
+    border-radius: 5px;
+    /* حواف مدورة */
+}
+
+/* ستايل أزرار الدخول */
+.login {
+    background-color: #1e3a8a;
+    /* أزرق داكن */
+    color: white;
+    border: 2px solid #1e3a8a;
+    /* نفس اللون لحدود الزر */
+    border-radius: 0;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+
+.login:hover {
+    background-color: #2563eb;
+    /* تأثير hover ليتغير اللون قليلاً */
+    border-color: #2563eb;
+}
+
+/* ستايل أزرار التسجيل */
+.register {
+    background-color: #10b981;
+    /* أخضر فاتح */
+    color: white;
+    border: 2px solid #10b981;
+    border-radius: 0;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+
+.register:hover {
+    background-color: #34d399;
+    /* تأثير hover ليتغير اللون قليلاً */
+    border-color: #34d399;
+}
+
+/* ستايل أزرار العربة */
+.cart {
+    background-color: #f97316;
+    /* برتقالي دافئ */
+    color: white;
+    border: 2px solid #f97316;
+    border-radius: 0;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+
+.cart:hover {
+    background-color: #fb923c;
+    /* تأثير hover ليتغير اللون قليلاً */
+    border-color: #fb923c;
+}
+
+/* ستايل أزرار الخروج */
+.logout {
+    background-color: #dc2626;
+    /* أحمر داكن */
+    color: white;
+    border: 2px solid #dc2626;
+    /* نفس اللون لحدود الزر */
+    border-radius: 0;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+
+.logout:hover {
+    background-color: #ef4444;
+    /* تأثير hover ليتغير اللون قليلاً */
+    border-color: #ef4444;
+}

@@ -1,0 +1,76 @@
+.hero {
+    margin-top: 100px;
+}
+/* PRODUCTS */
+.custom-btn {
+    cursor: pointer;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.75rem;
+    border: 2px solid;
+    border-bottom-width: 4px;
+    transition: all 0.3s ease;
+}
+
+/* زر إضافة إلى السلة */
+.custom-btn.add-to-cart {
+    background-color: #3b82f6;
+    /* Blue */
+    color: white;
+    border-color: #2563eb;
+    /* Blue border */
+}
+
+.custom-btn.add-to-cart:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+    border-bottom-width: 6px;
+}
+
+.custom-btn.add-to-cart:active {
+    filter: brightness(0.9);
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+}
+
+/* زر إضافة إلى المفضلة */
+.custom-btn.add-to-favorite {
+    background-color: #ef4444;
+    /* Red */
+    color: white;
+    border-color: #dc2626;
+    /* Red border */
+}
+
+.custom-btn.add-to-favorite:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+    border-bottom-width: 6px;
+}
+
+.custom-btn.add-to-favorite:active {
+    filter: brightness(0.9);
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+}
+
+/* زر عرض التفاصيل */
+.custom-btn.view-details {
+    background-color: #10b981;
+    /* Green */
+    color: white;
+    border-color: #16a34a;
+    /* Green border */
+}
+
+.custom-btn.view-details:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+    border-bottom-width: 6px;
+}
+
+.custom-btn.view-details:active {
+    filter: brightness(0.9);
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+}
+
