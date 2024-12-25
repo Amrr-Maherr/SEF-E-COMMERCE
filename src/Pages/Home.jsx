@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 import NavBar from "../Componants/NavBar";
 import Footer from "../Componants/Footer";
 import Hero from "../Assets/Hero-image.jpg";
-import "@fortawesome/fontawesome-free/css/all.min.css"; // تأكد من استيراد Font Awesome
 import { Link } from "react-router-dom";
 
 function Home() {
+  const UserInfo = localStorage.getItem("UserInfo");
   const [IsLogedIn, setLogedIn] = useState(false);
-
   useEffect(() => {
-    const UserInfo = localStorage.getItem('UserInfo');
     if (UserInfo) {
       setLogedIn(false);
     } else {
