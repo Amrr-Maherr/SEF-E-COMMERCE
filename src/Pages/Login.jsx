@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useRef, useEffect } from "react";
+import {useEffect, useRef} from "react";
 
 function Login() {
   const handleForm = (e) => {
@@ -45,7 +45,10 @@ const handelLogin = () => {
     });
   }
 };
-
+  useEffect(() => {
+  EmailInput.current.value = ""
+  PasswordInput.current.value = ""
+},[])
   return (
     <div className="login-container p-4 vh-100 d-flex align-items-center justify-content-center shadow-lg rounded">
       <div className="container">

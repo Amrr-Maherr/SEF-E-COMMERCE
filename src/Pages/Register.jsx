@@ -50,6 +50,7 @@ function Register() {
         text: "Please create a secure password for your account.",
       });
     } else {
+      
       // لو كل البيانات سليمة هنعمل set للstate عشان نخزن البيانات
       setUserInfo({
         Name: UserName,
@@ -77,6 +78,9 @@ function Register() {
     if (Object.keys(UserInfo).length > 0) {
       localStorage.setItem("UserInfo", JSON.stringify(UserInfo)); // بنخزن البيانات في الـ localStorage
     }
+    UserNameInput.current.value = ""
+    EmailInput.current.value = ""
+    PasswordInput.current.value = ""
   }, [UserInfo]); // بتتنفذ كلما اتغيرت الـ state بتاعت UserInfo
 
   return (

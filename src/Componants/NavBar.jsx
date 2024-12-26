@@ -47,22 +47,26 @@ function NavBar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mx-auto d-flex justify-content-center gap-3 w-50 text-center">
             <li className="nav-item">
-              <Link className="nav-link active fs-5" aria-current="page" to="/">
+              <Link
+                className="nav-link active fs-5 rounded-5"
+                aria-current="page"
+                to="/"
+              >
                 Home
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link fs-5" to="/products">
+              <Link className="nav-link fs-5 rounded-5" to="/products">
                 Products
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link fs-5" to="/about">
+              <Link className="nav-link fs-5 rounded-5" to="/about">
                 About
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link fs-5" to="/contact">
+              <Link className="nav-link fs-5 rounded-5" to="/contact">
                 Contact
               </Link>
             </li>
@@ -71,14 +75,23 @@ function NavBar() {
             {isLogedIn ? (
               <>
                 <div className="me-3">
-                  <Link className="btn border-0 cart" to="/cart">
+                  <Link
+                    className="btn border-0 rounded-5 favorites"
+                    to="/FavoriteProducts"
+                  >
+                    <i className="fa fa-heart"></i>{" "}
+                    <span className="ms-2">Favorites</span>
+                  </Link>
+                </div>
+                <div className="me-3">
+                  <Link className="btn border-0 rounded-5 cart" to="/cart">
                     <i className="fa fa-shopping-cart"></i>{" "}
                     <span className="ms-2">My Cart</span>
                   </Link>
                 </div>
                 <div>
                   <button
-                    className="btn border-0 logout"
+                    className="btn border-0 rounded-5 logout"
                     onClick={handleLogOut}
                   >
                     <i className="fa fa-sign-out-alt"></i>{" "}
@@ -89,13 +102,16 @@ function NavBar() {
             ) : (
               <>
                 <div className="me-3">
-                  <Link className="btn border-0 login" to="/login">
+                  <Link className="btn border-0 rounded-5 login" to="/login">
                     <i className="fa fa-lock"></i>{" "}
                     <span className="ms-2">Sign In</span>
                   </Link>
                 </div>
                 <div>
-                  <Link className="btn border-0 register" to="/register">
+                  <Link
+                    className="btn border-0 rounded-5 register"
+                    to="/register"
+                  >
                     <i className="fa fa-user-plus"></i>{" "}
                     <span className="ms-2">Sign Up</span>
                   </Link>

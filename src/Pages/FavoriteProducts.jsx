@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import NavBar from "../Componants/NavBar";
+import Footer from "../Componants/Footer";
 
 
 function FavoriteProducts() {
@@ -23,7 +25,8 @@ function FavoriteProducts() {
 
   return (
     <>
-      <div className="container my-5">
+      <NavBar/>
+      <div className="container hero">
         <h2 className="text-center mb-5 text-dark font-weight-bold">
           Favorite Products
         </h2>
@@ -51,7 +54,7 @@ function FavoriteProducts() {
                   </p>
                   <div className="d-flex justify-content-between align-items-center">
                     <Link
-                      to={`/product-details/${product.id}`}
+                      to={`/SingleProduct`}
                       className="btn btn-info shadow-sm py-2 px-4 rounded-pill transition-all duration-300 hover:bg-dark hover:text-white"
                     >
                       <i className="fas fa-eye me-2"></i> View Details
@@ -69,7 +72,7 @@ function FavoriteProducts() {
           ))}
         </div>
       </div>
-
+      <Footer/>
     </>
   );
 }

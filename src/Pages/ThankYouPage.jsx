@@ -1,11 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import NavBar from "../Componants/NavBar";
+import Footer from "../Componants/Footer";
 
 
 function ThankYouPage({ email, transactionId }) {
   return (
     <>
-      <div className="container hero py-5">
+      <NavBar/>
+      <div className="container hero ">
         <div className="row justify-content-center">
           <div className="col-md-8 col-lg-6">
             <div
@@ -63,6 +66,7 @@ function ThankYouPage({ email, transactionId }) {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 }

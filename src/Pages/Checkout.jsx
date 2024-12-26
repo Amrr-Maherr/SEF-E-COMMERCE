@@ -1,22 +1,14 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import NavBar from "../Componants/NavBar";
 import Footer from "../Componants/Footer";
 
-function Checkout() {
-  const navigate = useNavigate();
-
+const Checkout = () => {
   const [formData, setFormData] = useState({
     name: "",
     cardNumber: "",
     expiryDate: "",
     cvv: "",
   });
-
-  const [cartItems] = useState([
-    { id: 1, name: "Smartphone", price: 299.99, quantity: 1 },
-    { id: 2, name: "Laptop", price: 799.99, quantity: 1 },
-  ]);
 
   const [errors, setErrors] = useState({
     name: "",
@@ -25,69 +17,54 @@ function Checkout() {
     cvv: "",
   });
 
+  const [loading, setLoading] = useState(false);
+  const [cartItems, setCartItems] = useState([
+    { id: 1, name: "Item 1", quantity: 2, price: 50 },
+    { id: 2, name: "Item 2", quantity: 1, price: 100 },
+  ]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    let formErrors = {};
+    if (!formData.name) formErrors.name = "Name on Card is required";
+    if (!formData.cardNumber) formErrors.cardNumber = "Card Number is required";
+    if (!formData.expiryDate) formErrors.expiryDate = "Expiry Date is required";
+    if (!formData.cvv) formErrors.cvv = "CVV is required";
+
+    setErrors(formErrors);
+
+    if (Object.keys(formErrors).length === 0) {
+      setLoading(true);
+      setTimeout(() => {
+        alert("Payment Complete");
+        setLoading(false);
+      }, 2000);
+    }
+  };
+
   const calculateTotal = () => {
     return cartItems
       .reduce((total, item) => total + item.price * item.quantity, 0)
       .toFixed(2);
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const validateForm = () => {
-    const newErrors = { ...errors };
-
-    if (!formData.name) {
-      newErrors.name = "Name is required.";
-    } else {
-      newErrors.name = "";
-    }
-
-    if (!formData.cardNumber || formData.cardNumber.length !== 16) {
-      newErrors.cardNumber = "Card number must be 16 digits.";
-    } else {
-      newErrors.cardNumber = "";
-    }
-
-    if (!formData.expiryDate) {
-      newErrors.expiryDate = "Expiry date is required.";
-    } else {
-      newErrors.expiryDate = "";
-    }
-
-    if (!formData.cvv || formData.cvv.length !== 3) {
-      newErrors.cvv = "CVV must be 3 digits.";
-    } else {
-      newErrors.cvv = "";
-    }
-
-    setErrors(newErrors);
-
-    return Object.values(newErrors).every((error) => error === "");
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // بعد الدفع الناجح، التوجه إلى صفحة الشكر أو التفعيل
-    navigate("/ThankYouPage");
-  };
-
   return (
     <>
-      <NavBar/>
-      <div className="container hero">
-        <h2 className="text-center mb-4">
-          <i className="fas fa-credit-card me-2"></i> Checkout
-        </h2>
+      <NavBar />
+      <div className="container hero bg-light p-5">
+        <h2 className="text-center mb-4 text-primary">Checkout</h2>
         <div className="row">
           <div className="col-md-6">
-            <h4>
+            <h4 className="text-info">
               <i className="fas fa-boxes me-2"></i> Order Summary
             </h4>
             <div className="list-group">
@@ -108,7 +85,7 @@ function Checkout() {
             </div>
           </div>
           <div className="col-md-6">
-            <h4>
+            <h4 className="text-info">
               <i className="fas fa-credit-card me-2"></i> Payment Information
             </h4>
             <form onSubmit={handleSubmit}>
@@ -184,8 +161,15 @@ function Checkout() {
                   )}
                 </div>
               </div>
-              <button type="submit" className="btn btn-primary w-100">
-                <i className="fas fa-check-circle me-2"></i> Complete Payment
+              <button type="submit" className="btn btn-success w-100">
+                {loading ? (
+                  <div className="spinner-border text-light" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                ) : (
+                  <i className="fas fa-check-circle me-2"></i>
+                )}
+                Complete Payment
               </button>
             </form>
           </div>
@@ -194,6 +178,6 @@ function Checkout() {
       <Footer/>
     </>
   );
-}
+};
 
 export default Checkout;
