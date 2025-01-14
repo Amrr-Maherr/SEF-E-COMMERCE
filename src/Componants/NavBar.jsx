@@ -11,7 +11,7 @@ function NavBar() {
 
   const handleLogOut = () => {
     localStorage.removeItem("UserInfo");
-    setLogedIn(false); // تحديث الحالة بعد الخروج
+    setLogedIn(false); 
     Swal.fire({
       title: "Logged Out Successfully",
       text: "You have been successfully logged out.",

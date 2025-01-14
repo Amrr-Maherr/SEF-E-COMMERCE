@@ -52,11 +52,7 @@ function Register() {
     } else {
       
       // لو كل البيانات سليمة هنعمل set للstate عشان نخزن البيانات
-      setUserInfo({
-        Name: UserName,
-        Email: UserEmail,
-        PasswordInput: UserPassword,
-      });
+      setUserInfo({Name: UserName,Email: UserEmail,PasswordInput: UserPassword,});
 
       // هنظهر رسالة تأكيد بنجاح التسجيل
       Swal.fire({
