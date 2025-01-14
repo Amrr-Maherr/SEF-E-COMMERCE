@@ -15,8 +15,10 @@ function Home() {
             <div className="card">
               <img src={Hero} className="card-img" alt="ShopEase Hero" />
               <div className="card-img-overlay d-flex flex-column justify-content-center align-items-start text-white p-4 home">
-                <h1 className="display-1 fw-bold">Welcome to ShopEase</h1>
-                <p className="lead fw-bold">
+                <h1 className="fs-1 fs-md-3 fs-sm-5 fw-bold">
+                  Welcome to ShopEase
+                </h1>
+                <p className="fs-3 fs-md-4 fs-sm-5">
                   Quality shopping made simple and affordable.
                 </p>
               </div>
