@@ -3,7 +3,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Link, useNavigate } from "react-router-dom";
 import "../Style/NavStyle.css";
 import Swal from "sweetalert2";
-
+import { motion } from "framer-motion";
 function NavBar() {
   const UserInfo = localStorage.getItem("UserInfo");
   const navigate = useNavigate();
@@ -28,7 +28,12 @@ function NavBar() {
   }, [UserInfo]);
 
   return (
-    <nav className="navbar navbar-expand-lg bg-light fixed-top">
+    <motion.nav
+      initial={{ y: "-100vh" }}
+      animate={{ y: 0 }}
+      transition={{ duration: 1 }}
+      className="navbar navbar-expand-lg bg-light fixed-top"
+    >
       <div className="container p-2">
         <a className="navbar-brand" href="/">
           ShopEase
@@ -46,7 +51,11 @@ function NavBar() {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mx-auto d-flex justify-content-center gap-3 w-50 text-center">
-            <li className="nav-item">
+            <motion.li
+              whileHover={{ scale: 1 }}
+              whileTap={{ scale: 1.5 }}
+              className="nav-item"
+            >
               <Link
                 className="nav-link active fs-5 rounded-5"
                 aria-current="page"
@@ -54,22 +63,34 @@ function NavBar() {
               >
                 Home
               </Link>
-            </li>
-            <li className="nav-item">
+            </motion.li>
+            <motion.li
+              whileHover={{ scale: 1 }}
+              whileTap={{ scale: 1.5 }}
+              className="nav-item"
+            >
               <Link className="nav-link fs-5 rounded-5" to="/products">
                 Products
               </Link>
-            </li>
-            <li className="nav-item">
+            </motion.li>
+            <motion.li
+              whileHover={{ scale: 1 }}
+              whileTap={{ scale: 1.5 }}
+              className="nav-item"
+            >
               <Link className="nav-link fs-5 rounded-5" to="/about">
                 About
               </Link>
-            </li>
-            <li className="nav-item">
+            </motion.li>
+            <motion.li
+              whileHover={{ scale: 1 }}
+              whileTap={{ scale: 1.5 }}
+              className="nav-item"
+            >
               <Link className="nav-link fs-5 rounded-5" to="/contact">
                 Contact
               </Link>
-            </li>
+            </motion.li>
           </ul>
           <div className="ms-auto d-flex align-items-center">
             {isLogedIn ? (
@@ -121,7 +142,7 @@ function NavBar() {
           </div>
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 }
 

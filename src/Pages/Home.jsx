@@ -4,7 +4,7 @@ import Footer from "../Componants/Footer";
 import Hero from "../Assets/pexels-evonics-1058277.jpg";
 import "../Style/HomeStyle.css";
 import { Link, Outlet } from "react-router-dom";
-
+import { motion } from "motion/react";
 function Home() {
   return (
     <>
@@ -15,10 +15,22 @@ function Home() {
             <div className="card">
               <img src={Hero} className="card-img" alt="ShopEase Hero" />
               <div className="card-img-overlay d-flex flex-column justify-content-center align-items-start text-white p-4 home">
-                <h1 className="display-1 fw-bold">Welcome to ShopEase</h1>
-                <p className="lead fw-bold">
+                <motion.h1
+                  initial={{ x: "-100vw" }}
+                  animate={{ x: 0 }}
+                  transition={{ duration: 1 }}
+                  className="fs-1 fs-md-3 fs-sm-5 fw-bold"
+                >
+                  Welcome to ShopEase
+                </motion.h1>
+                <motion.p
+                  initial={{ x: "100vw" }}
+                  animate={{ x: 0 }}
+                  transition={{ duration: 1 }}
+                  className="fs-3 fs-md-4 fs-sm-5"
+                >
                   Quality shopping made simple and affordable.
-                </p>
+                </motion.p>
               </div>
             </div>
           </div>

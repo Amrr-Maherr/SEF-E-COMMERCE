@@ -1,7 +1,7 @@
 import Swal from "sweetalert2"; // بنستورد مكتبة SweetAlert عشان نعرض تنبيهات للمستخدم
 import { Link, useNavigate } from "react-router-dom"; // بنستورد Link و useNavigate من react-router-dom للتنقل بين الصفحات
 import { useState, useRef, useEffect } from "react"; // بنستورد useState و useRef و useEffect من React لإدارة الحالة والمراجع
-
+import { motion } from "framer-motion";
 function Register() {
   const navigate = useNavigate(); // دي هتساعدنا في التنقل بين الصفحات بعد التسجيل
   const [UserInfo, setUserInfo] = useState({}); // هنا بنعرف الحالة بتاعت البيانات اللي هنسجلها للمستخدم
@@ -82,12 +82,15 @@ function Register() {
   return (
     <div className="register-container p-4 vh-100 d-flex align-items-center justify-content-center shadow-lg rounded">
       <div className="container">
-        <h1
+        <motion.h1
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
           className="text-center mb-4 text-primary"
           style={{ fontFamily: "'Poppins', sans-serif", fontWeight: "600" }}
         >
           Register
-        </h1>
+        </motion.h1>
         <form
           className="mx-auto"
           style={{ maxWidth: "400px" }}
@@ -150,7 +153,10 @@ function Register() {
               ref={PasswordInput} // الربط بالمراجع
             />
           </div>
-          <button
+          <motion.button
+            initial={{ x: "-100vw" }}
+            animate={{ x: 0 }}
+            transition={{duration:0.8}}
             type="submit"
             className="btn btn-primary w-100 mb-3"
             style={{
@@ -163,12 +169,12 @@ function Register() {
             }} // لما المستخدم يضغط على زر التسجيل، الدالة هتشتغل
           >
             Register
-          </button>
+          </motion.button>
         </form>
         <p className="mt-4 text-center" style={{ fontSize: "16px" }}>
           Already have an account?{" "}
           <Link to="/login" className="text-decoration-none text-primary">
-            Login 
+            Login
           </Link>
         </p>
       </div>

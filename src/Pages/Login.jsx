@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import {useEffect, useRef} from "react";
-
+import { motion } from "framer-motion";
 function Login() {
   const handleForm = (e) => {
     e.preventDefault(); // هنا بنوقف الإجراء الافتراضي علشان نتعامل مع البيانات يدويًا
@@ -52,12 +52,15 @@ const handelLogin = () => {
   return (
     <div className="login-container p-4 vh-100 d-flex align-items-center justify-content-center shadow-lg rounded">
       <div className="container">
-        <h1
+        <motion.h1
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
           className="text-center mb-4 text-primary"
           style={{ fontFamily: "'Poppins', sans-serif", fontWeight: "600" }}
         >
           Login
-        </h1>
+        </motion.h1>
         <form
           className="mx-auto"
           style={{ maxWidth: "400px" }}
@@ -105,7 +108,10 @@ const handelLogin = () => {
               ref={PasswordInput}
             />
           </div>
-          <button
+          <motion.button
+            initial={{ x: "-100vw" }}
+            animate={{ x: 0 }}
+            transition={{ duration: 0.8 }}
             type="submit" // هنا استخدمنا type="submit" علشان يتم إرسال البيانات لما يتم الضغط على الزر
             className="btn btn-primary w-100 mb-3"
             style={{
@@ -113,10 +119,12 @@ const handelLogin = () => {
               borderRadius: "25px",
               boxShadow: "0px 4px 6px rgba(0, 123, 255, 0.2)",
             }}
-            onClick={()=>{handelLogin()}}
+            onClick={() => {
+              handelLogin();
+            }}
           >
             Login
-          </button>
+          </motion.button>
         </form>
         <p className="mt-4 text-center" style={{ fontSize: "16px" }}>
           Don't have an account?{" "}
