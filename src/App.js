@@ -21,7 +21,7 @@ import Women from "./Componants/Women.jsx";
 import Jewelrys from "./Componants/Jewelrys.jsx";
 import Electronics from "./Componants/Electronics.jsx";
 import AllProducts from "./Componants/AllProducts.jsx";
-import AnimatedCursor from "react-animated-cursor"
+
 
 function App() {
   return (
@@ -47,28 +47,6 @@ function App() {
           <Route path="ThankYouPage" element={<ThankYouPage />} />
           <Route path="SingleProduct/:id" element={<SingleProduct />} />
         </Routes>
-        <AnimatedCursor
-          innerSize={8}
-          outerSize={8}
-          hasBlendMode={true}
-          color="128, 128, 128"
-          outerAlpha={0.2}
-          innerScale={2}
-          outerScale={10}
-          clickables={[
-            "a",
-            'input[type="text"]',
-            'input[type="email"]',
-            'input[type="number"]',
-            'input[type="submit"]',
-            'input[type="image"]',
-            "label[for]",
-            "select",
-            "textarea",
-            "button",
-            ".link",
-          ]}
-        />
       </div>
     </BrowserRouter>
   );

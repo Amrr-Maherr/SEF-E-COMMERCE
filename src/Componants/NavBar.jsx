@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { motion } from "framer-motion";
 function NavBar() {
   const UserInfo = localStorage.getItem("UserInfo");
+  const cardData = JSON.parse(localStorage.getItem("product"))
   const navigate = useNavigate();
   const [isLogedIn, setLogedIn] = useState(false);
 
@@ -107,7 +108,7 @@ function NavBar() {
                 <div className="me-3">
                   <Link className="btn border-0 rounded-5 cart" to="/cart">
                     <i className="fa fa-shopping-cart"></i>{" "}
-                    <span className="ms-2">My Cart</span>
+                    <span className="ms-2">My Cart ({cardData.length})</span>
                   </Link>
                 </div>
                 <div>
