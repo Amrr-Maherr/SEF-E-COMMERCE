@@ -67,7 +67,6 @@ function App() {
             "textarea",
             "button",
             ".link",
-            "div"
           ]}
         />
       </div>
