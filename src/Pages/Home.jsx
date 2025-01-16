@@ -1,11 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../Componants/NavBar";
 import Footer from "../Componants/Footer";
 import Hero from "../Assets/pexels-evonics-1058277.jpg";
 import "../Style/HomeStyle.css";
-import { Link, Outlet } from "react-router-dom";
 import { motion } from "motion/react";
+import axios from "axios";
+import CategoryCard from "../Componants/CategoryCard";
 function Home() {
+  const [categories, setCategories] = useState([])
+  const [singleCat, setSingleCat] = useState([])
+  const [loading,setLoading] = useState(true)
+  useEffect(() => {
+    axios
+      .get("https://fakestoreapi.com/products/categories")
+      .then((response) => {
+        setCategories(response.data)
+        HandelGetCategory(response.data[2])
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [])
+  const HandelGetCategory = (Category) => {
+    axios
+      .get(`https://fakestoreapi.com/products/category/${Category}`)
+      .then((response) => {
+        setSingleCat(response.data);
+        setLoading(false)
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(true)
+      });
+  }
   return (
     <>
       <NavBar />
@@ -78,49 +105,40 @@ function Home() {
           <div className="container py-3">
             <div className="row justify-content-center">
               <div className="col-12 col-md-10 text-center">
-                <div
-                  className="btn-group d-flex flex-wrap gap-3 justify-content-center"
-                  role="group"
-                  aria-label="Product Categories"
-                >
-                  <Link
-                    to="/All"
-                    className="btn btn-primary rounded-pill flex-grow-1"
+                {categories.map((Category, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      HandelGetCategory(Category);
+                    }}
+                    className="btn btn-primary mx-2 my-2 rounded text-white"
                   >
-                    All Products
-                  </Link>
-                  <Link
-                    to="/men" // هنا، سنعرض محتوى المنتجات الخاصة بالرجال
-                    className="btn btn-success rounded-pill flex-grow-1"
-                  >
-                    Men's Collection
-                  </Link>
-                  <Link
-                    to="/women"
-                    className="btn btn-danger rounded-pill flex-grow-1"
-                  >
-                    Women's Collection
-                  </Link>
-                  <Link
-                    to="/jewelry"
-                    className="btn btn-warning rounded-pill flex-grow-1"
-                  >
-                    Jewelry
-                  </Link>
-                  <Link
-                    to="/electronics"
-                    className="btn btn-info rounded-pill flex-grow-1"
-                  >
-                    Electronics
-                  </Link>
-                </div>
+                    {Category}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
-          <div className="col-12 mt-4">
-            <Outlet />{" "}
-            {/* هذا سيمكنك من عرض المحتوى الخاص بالمنتجات الخاصة بالرجال داخل نفس الصفحة */}
-          </div>
+          {loading ? (
+            <>
+              <div className="loader">
+                <h1>Loading...</h1>
+              </div>
+            </>
+          ) : (
+            <>
+              {singleCat.map((product) => (
+                <motion.div
+                  initial={{ x: "-100vw" }}
+                  animate={{ x: 0 }}
+                  transition={{duration:0.5}}
+                  className="col-xl-4 col-12 mt-4"
+                >
+                  <CategoryCard product={product} />
+                </motion.div>
+              ))}
+            </>
+          )}
         </div>
       </div>
       <Footer />
