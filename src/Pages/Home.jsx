@@ -40,7 +40,7 @@ function Home() {
         <div className="row">
           <div className="col-12">
             <div className="card">
-              <img src={Hero} className="card-img" alt="ShopEase Hero" />
+              <img src={Hero} className="card-img" alt="ShopEase Hero"  />
               <div className="card-img-overlay d-flex flex-column justify-content-center align-items-start text-white p-4 home">
                 <motion.h1
                   initial={{ x: "-100vw" }}

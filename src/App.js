@@ -21,6 +21,7 @@ import Women from "./Componants/Women.jsx";
 import Jewelrys from "./Componants/Jewelrys.jsx";
 import Electronics from "./Componants/Electronics.jsx";
 import AllProducts from "./Componants/AllProducts.jsx";
+import AnimatedCursor from "react-animated-cursor"
 
 function App() {
   return (
@@ -29,15 +30,13 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-
           <Route path="/" element={<Home />}>
             <Route path="men" element={<Men />} />
             <Route path="women" element={<Women />} />
             <Route path="jewelry" element={<Jewelrys />} />
-            <Route path="electronics" element={<Electronics/>} />
-            <Route path="All" element={<AllProducts/>} />
+            <Route path="electronics" element={<Electronics />} />
+            <Route path="All" element={<AllProducts />} />
           </Route>
-          
           <Route path="/products" element={<Products />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
@@ -48,6 +47,29 @@ function App() {
           <Route path="ThankYouPage" element={<ThankYouPage />} />
           <Route path="SingleProduct/:id" element={<SingleProduct />} />
         </Routes>
+        <AnimatedCursor
+          innerSize={8}
+          outerSize={8}
+          hasBlendMode={true}
+          color="128, 128, 128"
+          outerAlpha={0.2}
+          innerScale={2}
+          outerScale={10}
+          clickables={[
+            "a",
+            'input[type="text"]',
+            'input[type="email"]',
+            'input[type="number"]',
+            'input[type="submit"]',
+            'input[type="image"]',
+            "label[for]",
+            "select",
+            "textarea",
+            "button",
+            ".link",
+            "div"
+          ]}
+        />
       </div>
     </BrowserRouter>
   );

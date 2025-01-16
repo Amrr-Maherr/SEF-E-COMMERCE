@@ -5,7 +5,19 @@ import Footer from "../Componants/Footer";
 
 function Cart() {
   const Cart = JSON.parse(localStorage.getItem("product")) || [];
-  console.log(Cart);
+  const [TotalPrice, setTotalPrice] = useState();
+  useEffect(() => {
+    let total = 0;
+    const HandelToTalPrice = () => {
+      Cart.forEach((product) => {
+        total += product.price;
+      });
+    };
+
+    HandelToTalPrice();
+    setTotalPrice(Math.floor(total)); 
+
+  }, []);
   return (
     <>
       <NavBar />
@@ -22,8 +34,8 @@ function Cart() {
           </div>
         ) : (
           <div>
-            {Cart.map((item) => (
-              <div className="card mb-4 shadow-sm" key={item.id}>
+            {Cart.map((item,index) => (
+              <div className="card mb-4 shadow-sm" key={index}>
                 <div className="row g-0">
                   <div className="col-md-4">
                     <img
@@ -40,9 +52,7 @@ function Cart() {
                         Price: ${item.price.toFixed(2)}
                       </p>
                       <div className="d-flex align-items-center mb-3">
-                        <button
-                          className="btn btn-outline-secondary me-2"
-                        >
+                        <button className="btn btn-outline-secondary me-2">
                           <i className="fas fa-minus"></i>
                         </button>
                         <input
@@ -66,7 +76,7 @@ function Cart() {
             ))}
             <div className="d-flex justify-content-between align-items-center mt-4">
               <h4 className="text-primary">
-                <i className="fas fa-dollar-sign me-2"></i> Total: $
+                <i className="fas fa-dollar-sign me-2"></i> Total: $ {TotalPrice}
               </h4>
               <Link
                 to="/checkout"
