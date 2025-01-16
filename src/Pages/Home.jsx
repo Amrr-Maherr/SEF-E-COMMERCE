@@ -111,7 +111,7 @@ function Home() {
                     onClick={() => {
                       HandelGetCategory(Category);
                     }}
-                    className="btn btn-primary mx-2 my-2 rounded text-white"
+                    className="btn btn-primary mx-2 my-2 rounded text-white shadow-lg fs-4 fs-dm-5 fs-sm-5"
                   >
                     {Category}
                   </button>
@@ -131,7 +131,7 @@ function Home() {
                 <motion.div
                   initial={{ x: "-100vw" }}
                   animate={{ x: 0 }}
-                  transition={{duration:0.5}}
+                  transition={{ duration: 0.5 }}
                   className="col-xl-4 col-12 mt-4"
                 >
                   <CategoryCard product={product} />
