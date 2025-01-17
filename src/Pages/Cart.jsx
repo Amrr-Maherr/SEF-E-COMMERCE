@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import NavBar from "../Componants/NavBar";
 import Footer from "../Componants/Footer";
-
+import { motion } from "framer-motion";
 function Cart() {
   const [Cart, setCart] = useState(
     JSON.parse(localStorage.getItem("product")) || "[]"
@@ -28,9 +28,14 @@ function Cart() {
     <>
       <NavBar />
       <div className="container hero">
-        <h2 className="text-center mb-4 text-primary">
+        <motion.h2
+          initial={{ y: "-100vh" }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.9 }}
+          className="text-center mb-4 text-primary"
+        >
           <i className="fas fa-shopping-cart me-2"></i> Your Cart
-        </h2>
+        </motion.h2>
         {Cart.length === 0 ? (
           <div className="text-center">
             <h4>Your cart is empty.</h4>
@@ -41,7 +46,13 @@ function Cart() {
         ) : (
           <div>
             {Cart.map((item, index) => (
-              <div className="card mb-4 shadow-sm" key={index}>
+              <motion.div
+                initial={{ x: "-100vw" }}
+                animate={{ x: 0 }}
+                transition={{ duration: 0.5 }}
+                className="card mb-4 shadow-sm"
+                key={index}
+              >
                 <div className="row g-0">
                   <div className="col-md-4">
                     <img
@@ -58,9 +69,7 @@ function Cart() {
                         Price: ${item.price.toFixed(2)}
                       </p>
                       <div className="d-flex align-items-center mb-3">
-                        <button
-                          className="btn btn-outline-secondary me-2"
-                        >
+                        <button className="btn btn-outline-secondary me-2">
                           <i className="fas fa-minus"></i>
                         </button>
                         <input
@@ -69,9 +78,7 @@ function Cart() {
                           min="1"
                           style={{ maxWidth: "80px" }}
                         />
-                        <button
-                          className="btn btn-outline-secondary ms-2"
-                        >
+                        <button className="btn btn-outline-secondary ms-2">
                           <i className="fas fa-plus"></i>
                         </button>
                       </div>
@@ -84,7 +91,7 @@ function Cart() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
             <div className="d-flex justify-content-between align-items-center mt-4">
               <h4 className="text-primary">
