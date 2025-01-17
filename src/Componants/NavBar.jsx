@@ -4,15 +4,19 @@ import { Link, useNavigate } from "react-router-dom";
 import "../Style/NavStyle.css";
 import Swal from "sweetalert2";
 import { motion } from "framer-motion";
-function NavBar() {
-  const UserInfo = localStorage.getItem("UserInfo");
-  const cardData = JSON.parse(localStorage.getItem("product"))
-  const navigate = useNavigate();
-  const [isLogedIn, setLogedIn] = useState(false);
 
-  const handleLogOut = () => {
+function NavBar() {
+  const storedUserInfo = localStorage.getItem("UserInfo") || [];
+  const [cartItems, setCartItems] = useState(
+    JSON.parse(localStorage.getItem("product") || "[]")
+  );
+  const [cartItemCount, setCartItemCount] = useState(0);
+  const navigate = useNavigate();
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
+  const handleLogout = () => {
     localStorage.removeItem("UserInfo");
-    setLogedIn(false); 
+    setIsUserLoggedIn(false);
     Swal.fire({
       title: "Logged Out Successfully",
       text: "You have been successfully logged out.",
@@ -21,12 +25,16 @@ function NavBar() {
   };
 
   useEffect(() => {
-    if (UserInfo) {
-      setLogedIn(true);
+    setCartItemCount(cartItems.length);
+  }, [cartItems]);
+
+  useEffect(() => {
+    if (storedUserInfo) {
+      setIsUserLoggedIn(true);
     } else {
-      setLogedIn(false);
+      setIsUserLoggedIn(false);
     }
-  }, [UserInfo]);
+  }, [storedUserInfo]);
 
   return (
     <motion.nav
@@ -48,7 +56,7 @@ function NavBar() {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"></span>
+          <i className="fa-solid fa-bars"></i>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mx-auto d-flex justify-content-center gap-3 w-50 text-center">
@@ -94,29 +102,29 @@ function NavBar() {
             </motion.li>
           </ul>
           <div className="ms-auto d-flex align-items-center">
-            {isLogedIn ? (
+            {isUserLoggedIn ? (
               <>
                 <div className="me-3">
                   <Link
                     className="btn border-0 rounded-5 favorites"
                     to="/FavoriteProducts"
                   >
-                    <i className="fa fa-heart"></i>{" "}
+                    <i className="fa fa-heart"></i>
                     <span className="ms-2">Favorites</span>
                   </Link>
                 </div>
                 <div className="me-3">
                   <Link className="btn border-0 rounded-5 cart" to="/cart">
-                    <i className="fa fa-shopping-cart"></i>{" "}
-                    <span className="ms-2">My Cart ({cardData.length})</span>
+                    <i className="fa fa-shopping-cart"></i>
+                    <span className="ms-2">My Cart ({cartItemCount})</span>
                   </Link>
                 </div>
                 <div>
                   <button
                     className="btn border-0 rounded-5 logout"
-                    onClick={handleLogOut}
+                    onClick={handleLogout}
                   >
-                    <i className="fa fa-sign-out-alt"></i>{" "}
+                    <i className="fa fa-sign-out-alt"></i>
                     <span className="ms-2">Log Out</span>
                   </button>
                 </div>
@@ -125,7 +133,7 @@ function NavBar() {
               <>
                 <div className="me-3">
                   <Link className="btn border-0 rounded-5 login" to="/login">
-                    <i className="fa fa-lock"></i>{" "}
+                    <i className="fa fa-lock"></i>
                     <span className="ms-2">Sign In</span>
                   </Link>
                 </div>
@@ -134,7 +142,7 @@ function NavBar() {
                     className="btn border-0 rounded-5 register"
                     to="/register"
                   >
-                    <i className="fa fa-user-plus"></i>{" "}
+                    <i className="fa fa-user-plus"></i>
                     <span className="ms-2">Sign Up</span>
                   </Link>
                 </div>
