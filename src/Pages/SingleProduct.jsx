@@ -113,7 +113,7 @@ function ProductDetail() {
                     onClick={() => addToCart(product)} // Use addToCart with the product object
                     whileHover={{ scale: 0.8 }}
                     whileTap={{ scale: 1.3 }}
-                    className="btn btn-primary btn-lg shadow-sm rounded-pill py-2 px-4 me-2"
+                    className="btn btn-primary btn-lg shadow-sm rounded-pill py-2 px-4 my-4"
                     aria-label="Add to Cart"
                   >
                     <i className="fas fa-shopping-cart me-2"></i>
@@ -121,7 +121,7 @@ function ProductDetail() {
                   </motion.button>
                 </div>
 
-                <div className="mt-4">
+                <div>
                   <motion.button
                     whileHover={{ scale: 0.8 }}
                     whileTap={{ scale: 1.3 }}
