@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { motion } from "framer-motion";
 
 function NavBar() {
-  const storedUserInfo = localStorage.getItem("UserInfo") || [];
+  const storedUserInfo = localStorage.getItem("UserInfo");
   const [cartItems, setCartItems] = useState(
     JSON.parse(localStorage.getItem("product") || "[]")
   );

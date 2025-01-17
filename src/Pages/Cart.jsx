@@ -12,7 +12,7 @@ function Cart() {
   useEffect(() => {
     let total = 0;
     Cart.forEach((product) => {
-      total += product.price * (product.quantity || 1);
+      total += product.price;
     });
     setTotalPrice(Math.floor(total));
   }, [Cart]);
