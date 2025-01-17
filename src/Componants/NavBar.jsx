@@ -7,9 +7,7 @@ import { motion } from "framer-motion";
 
 function NavBar() {
   const storedUserInfo = localStorage.getItem("UserInfo");
-  const [cartItems, setCartItems] = useState(
-    JSON.parse(localStorage.getItem("product") || "[]")
-  );
+  const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem("product") || "[]"));
   const [cartItemCount, setCartItemCount] = useState(0);
   const navigate = useNavigate();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);

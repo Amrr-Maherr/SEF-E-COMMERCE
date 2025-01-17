@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import NavBar from "../Componants/NavBar"
 import Footer from "../Componants/Footer"
 import axios from "axios";
+import { motion } from "framer-motion";
 
 function SingleProduct() {
   const [pro, setPro] = useState({});
@@ -33,21 +34,34 @@ function SingleProduct() {
           </div>
         ) : (
           <div className="container">
-            <h2 className="text-center mb-4 text-dark font-weight-bold">
+            <motion.h2
+              initial={{ y: "-100vw" }}
+              animate={{ y: 0 }}
+              transition={{ duration: 1 }}
+              className="text-center mb-4 text-dark font-weight-bold"
+            >
               {pro.title}
-            </h2>
+            </motion.h2>
             <div className="row">
-              {/* قسم الصورة */}
-              <div className="col-md-6 mb-4">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 2 }}
+                className="col-md-6 mb-4"
+              >
                 <img
                   src={pro.image}
                   className="img-fluid rounded shadow-lg"
                   alt={pro.title}
                 />
-              </div>
+              </motion.div>
 
-              {/* قسم التفاصيل */}
-              <div className="col-md-6">
+              <motion.div
+                initial={{ x: "100vw" }}
+                animate={{ x: 0 }}
+                transition={{ duration: 1.5 }}
+                className="col-md-6"
+              >
                 <h4 className="text-muted mb-3">Description</h4>
                 <p className="lead mb-4">{pro.description}</p>
                 <p className="lead mb-4">Count: {pro.rating.count}</p>
@@ -55,23 +69,25 @@ function SingleProduct() {
                 <h4 className="text-success display-4">${pro.price}</h4>
                 {/* أزرار التحكم */}
                 <div className="mt-4">
-                  <button
+                  <motion.button
+                    whileHover={{ scale: 0.8 }}
+                    whileTap={{ scale: 1.3 }}
                     className="btn btn-danger btn-lg shadow-sm rounded-pill py-2 px-4 me-2"
                     aria-label="Add to Wishlist"
                   >
                     <i className="fas fa-heart me-2"></i>
                     Add to Wishlist
-                  </button>
-                  <button
+                  </motion.button>
+                  <motion.button
+                    whileHover={{ scale: 0.8 }}
+                    whileTap={{ scale: 1.3 }}
                     className="btn btn-primary btn-lg shadow-sm rounded-pill py-2 px-4 me-2"
                     aria-label="Add to Cart"
                   >
                     <i className="fas fa-shopping-cart me-2"></i>
                     Add to Cart
-                  </button>
+                  </motion.button>
                 </div>
-
-                {/* زر العودة إلى صفحة المنتجات */}
                 <div className="mt-4">
                   <Link
                     to="/products"
@@ -81,7 +97,7 @@ function SingleProduct() {
                     Back to Products
                   </Link>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         )}

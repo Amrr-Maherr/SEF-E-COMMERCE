@@ -4,9 +4,7 @@ import NavBar from "../Componants/NavBar";
 import Footer from "../Componants/Footer";
 import { motion } from "framer-motion";
 function Cart() {
-  const [Cart, setCart] = useState(
-    JSON.parse(localStorage.getItem("product")) || "[]"
-  );
+  const [Cart, setCart] = useState(JSON.parse(localStorage.getItem("product")) || "[]");
   const [TotalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
