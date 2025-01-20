@@ -16,7 +16,6 @@ function Card({ product }) {
       toast.success(`Product ${product.title.slice(0,10)} added to the cart successfully!`);
     } else {
       toast.error("You must log in first.");
-
     }
   };
 

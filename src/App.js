@@ -16,11 +16,7 @@ import PageNotFound from "./Pages/PageNotFound.jsx";
 import SingleProduct from "./Pages/SingleProduct.jsx";
 import FavoriteProducts from "./Pages/FavoriteProducts.jsx";
 import ThankYouPage from "./Pages/ThankYouPage.jsx";
-import Men from "./Componants/Men.jsx";
-import Women from "./Componants/Women.jsx";
-import Jewelrys from "./Componants/Jewelrys.jsx";
-import Electronics from "./Componants/Electronics.jsx";
-import AllProducts from "./Componants/AllProducts.jsx";
+
 
 
 function App() {
@@ -30,13 +26,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Home />}>
-            <Route path="men" element={<Men />} />
-            <Route path="women" element={<Women />} />
-            <Route path="jewelry" element={<Jewelrys />} />
-            <Route path="electronics" element={<Electronics />} />
-            <Route path="All" element={<AllProducts />} />
-          </Route>
+          <Route path="/" element={<Home />}/>
           <Route path="/products" element={<Products />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />

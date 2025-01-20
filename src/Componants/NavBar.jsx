@@ -59,8 +59,8 @@ function NavBar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mx-auto d-flex justify-content-center gap-3 w-50 text-center">
             <motion.li
-              whileHover={{ scale: 1 }}
-              whileTap={{ scale: 1.5 }}
+              whileHover={{ scale: 1.5 }}
+              whileTap={{ scale: 1 }}
               className="nav-item"
             >
               <Link
@@ -72,8 +72,8 @@ function NavBar() {
               </Link>
             </motion.li>
             <motion.li
-              whileHover={{ scale: 1 }}
-              whileTap={{ scale: 1.5 }}
+              whileHover={{ scale: 1.5 }}
+              whileTap={{ scale: 1 }}
               className="nav-item"
             >
               <Link className="nav-link fs-5 rounded-5" to="/products">
@@ -81,8 +81,8 @@ function NavBar() {
               </Link>
             </motion.li>
             <motion.li
-              whileHover={{ scale: 1 }}
-              whileTap={{ scale: 1.5 }}
+              whileHover={{ scale: 1.5 }}
+              whileTap={{ scale: 1 }}
               className="nav-item"
             >
               <Link className="nav-link fs-5 rounded-5" to="/about">
@@ -90,8 +90,8 @@ function NavBar() {
               </Link>
             </motion.li>
             <motion.li
-              whileHover={{ scale: 1 }}
-              whileTap={{ scale: 1.5 }}
+              whileHover={{ scale: 1.5 }}
+              whileTap={{ scale: 1 }}
               className="nav-item"
             >
               <Link className="nav-link fs-5 rounded-5" to="/contact">
@@ -102,7 +102,11 @@ function NavBar() {
           <div className="ms-auto d-flex align-items-center">
             {isUserLoggedIn ? (
               <>
-                <div className="me-3">
+                <motion.div
+                  whileHover={{ scale: 0.8 }}
+                  whileTap={{ scale: 1 }}
+                  className="me-3"
+                >
                   <Link
                     className="btn border-0 rounded-5 favorites"
                     to="/FavoriteProducts"
@@ -110,14 +114,18 @@ function NavBar() {
                     <i className="fa fa-heart"></i>
                     <span className="ms-2">Favorites</span>
                   </Link>
-                </div>
-                <div className="me-3">
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 0.8 }}
+                  whileTap={{ scale: 1 }}
+                  className="me-3"
+                >
                   <Link className="btn border-0 rounded-5 cart" to="/cart">
                     <i className="fa fa-shopping-cart"></i>
                     <span className="ms-2">My Cart ({cartItemCount})</span>
                   </Link>
-                </div>
-                <div>
+                </motion.div>
+                <motion.div whileHover={{ scale: 0.8 }} whileTap={{ scale: 1 }}>
                   <button
                     className="btn border-0 rounded-5 logout"
                     onClick={handleLogout}
@@ -125,17 +133,21 @@ function NavBar() {
                     <i className="fa fa-sign-out-alt"></i>
                     <span className="ms-2">Log Out</span>
                   </button>
-                </div>
+                </motion.div>
               </>
             ) : (
               <>
-                <div className="me-3">
+                <motion.div
+                  whileHover={{ scale: 0.8 }}
+                  whileTap={{ scale: 1 }}
+                  className="me-3"
+                >
                   <Link className="btn border-0 rounded-5 login" to="/login">
                     <i className="fa fa-lock"></i>
                     <span className="ms-2">Sign In</span>
                   </Link>
-                </div>
-                <div>
+                </motion.div>
+                <motion.div whileHover={{ scale: 0.8 }} whileTap={{ scale: 1 }}>
                   <Link
                     className="btn border-0 rounded-5 register"
                     to="/register"
@@ -143,7 +155,7 @@ function NavBar() {
                     <i className="fa fa-user-plus"></i>
                     <span className="ms-2">Sign Up</span>
                   </Link>
-                </div>
+                </motion.div>
               </>
             )}
           </div>
