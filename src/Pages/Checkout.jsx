@@ -1,61 +1,67 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../Componants/NavBar";
 import Footer from "../Componants/Footer";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    cardNumber: "",
-    expiryDate: "",
-    cvv: "",
-  });
+  const [cartItems, setCartItems] = useState(
+    JSON.parse(localStorage.getItem("product")) || []
+  );
+  const Navigate = useNavigate()
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [name,setName] = useState("")
+  const [cardNumber,setCardNumber] = useState("")
+  const [cvvNumber,setCvvNumber] = useState("")
+  const [expiryDate,setExpiryDate] = useState("")
+  const formData = {
+    name:name,
+    cardNumber:cardNumber,
+    cvvNumber:cvvNumber,
+    expiryDate:expiryDate
+  }
+ const HandelProducts = (event) => {
+   event.preventDefault();
 
-  const [errors, setErrors] = useState({
-    name: "",
-    cardNumber: "",
-    expiryDate: "",
-    cvv: "",
-  });
+   if (!name || !cardNumber || !cvvNumber || !expiryDate) {
+     // Show an error alert if any required field is missing
+     Swal.fire({
+       icon: "error",
+       title: "Error",
+       text: "Please fill out all required fields!",
+     });
+   } else if (cardNumber.length !== 16 || cvvNumber.length !== 3) {
+     // Show a warning alert if card number or CVV length is incorrect
+     Swal.fire({
+       icon: "warning",
+       title: "Warning",
+       text: "Please ensure the card number (16 digits) and CVV (3 digits) are entered correctly.",
+     });
+   } else {
+     // Show a success alert when all fields are valid
+     Swal.fire({
+       icon: "success",
+       title: "Payment Successful",
+       text: "Your payment has been processed successfully! Thank you.",
+     });
 
-  const [loading, setLoading] = useState(false);
-  const [cartItems, setCartItems] = useState([
-    { id: 1, name: "Item 1", quantity: 2, price: 50 },
-    { id: 2, name: "Item 2", quantity: 1, price: 100 },
-  ]);
+   }
+   setTimeout(() => {
+    Navigate("/ThankYouPage");
+   },2000);
+ };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  useEffect(() => {
+    const calculateTotal = () => {
+      let total = 0;
+      cartItems.forEach((item) => {
+        total += item.price * (item.quantity || 1);
+      });
+      setTotalPrice(total);
+    };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    let formErrors = {};
-    if (!formData.name) formErrors.name = "Name on Card is required";
-    if (!formData.cardNumber) formErrors.cardNumber = "Card Number is required";
-    if (!formData.expiryDate) formErrors.expiryDate = "Expiry Date is required";
-    if (!formData.cvv) formErrors.cvv = "CVV is required";
-
-    setErrors(formErrors);
-
-    if (Object.keys(formErrors).length === 0) {
-      setLoading(true);
-      setTimeout(() => {
-        alert("Payment Complete");
-        setLoading(false);
-      }, 2000);
-    }
-  };
-
-  const calculateTotal = () => {
-    return cartItems
-      .reduce((total, item) => total + item.price * item.quantity, 0)
-      .toFixed(2);
-  };
+    calculateTotal();
+  }, [cartItems]);
 
   return (
     <>
@@ -63,17 +69,18 @@ const Checkout = () => {
       <div className="container hero bg-light p-5">
         <h2 className="text-center mb-4 text-primary">Checkout</h2>
         <div className="row">
+          {/* Order Summary Section */}
           <div className="col-md-6">
             <h4 className="text-info">
               <i className="fas fa-boxes me-2"></i> Order Summary
             </h4>
             <div className="list-group">
-              {cartItems.map((item) => (
-                <div className="list-group-item" key={item.id}>
+              {cartItems.map((item, index) => (
+                <div className="list-group-item" key={index}>
                   <div className="d-flex justify-content-between">
-                    <span>{item.name}</span>
+                    <span>{item.title}</span>
                     <span>
-                      {item.quantity} x ${item.price.toFixed(2)}
+                      {item.quantity || 1} x ${item.price.toFixed(2)}
                     </span>
                   </div>
                 </div>
@@ -81,29 +88,29 @@ const Checkout = () => {
             </div>
             <div className="mt-3 d-flex justify-content-between">
               <h5>Total:</h5>
-              <h5>${calculateTotal()}</h5>
+              <h5>${totalPrice.toFixed(2)}</h5>
             </div>
           </div>
+
+          {/* Payment Information Section */}
           <div className="col-md-6">
             <h4 className="text-info">
               <i className="fas fa-credit-card me-2"></i> Payment Information
             </h4>
-            <form onSubmit={handleSubmit}>
+            <form>
               <div className="mb-3">
                 <label htmlFor="name" className="form-label">
                   <i className="fas fa-user me-2"></i> Name on Card
                 </label>
                 <input
                   type="text"
-                  className={`form-control ${errors.name ? "is-invalid" : ""}`}
+                  className="form-control"
                   id="name"
                   name="name"
-                  value={formData.name}
-                  onChange={handleChange}
+                  onChange={(event) => {
+                    setName(event.target.value);
+                  }}
                 />
-                {errors.name && (
-                  <div className="invalid-feedback">{errors.name}</div>
-                )}
               </div>
               <div className="mb-3">
                 <label htmlFor="cardNumber" className="form-label">
@@ -111,18 +118,14 @@ const Checkout = () => {
                 </label>
                 <input
                   type="text"
-                  className={`form-control ${
-                    errors.cardNumber ? "is-invalid" : ""
-                  }`}
+                  className="form-control"
                   id="cardNumber"
                   name="cardNumber"
-                  value={formData.cardNumber}
-                  onChange={handleChange}
                   maxLength="16"
+                  onChange={(event) => {
+                    setCardNumber(event.target.value);
+                  }}
                 />
-                {errors.cardNumber && (
-                  <div className="invalid-feedback">{errors.cardNumber}</div>
-                )}
               </div>
               <div className="row">
                 <div className="col-md-6 mb-3">
@@ -131,17 +134,13 @@ const Checkout = () => {
                   </label>
                   <input
                     type="month"
-                    className={`form-control ${
-                      errors.expiryDate ? "is-invalid" : ""
-                    }`}
+                    className="form-control"
                     id="expiryDate"
                     name="expiryDate"
-                    value={formData.expiryDate}
-                    onChange={handleChange}
+                    onChange={(event) => {
+                      setExpiryDate(event.target.value);
+                    }}
                   />
-                  {errors.expiryDate && (
-                    <div className="invalid-feedback">{errors.expiryDate}</div>
-                  )}
                 </div>
                 <div className="col-md-6 mb-3">
                   <label htmlFor="cvv" className="form-label">
@@ -149,33 +148,30 @@ const Checkout = () => {
                   </label>
                   <input
                     type="text"
-                    className={`form-control ${errors.cvv ? "is-invalid" : ""}`}
+                    className="form-control"
                     id="cvv"
                     name="cvv"
-                    value={formData.cvv}
-                    onChange={handleChange}
                     maxLength="3"
+                    onChange={(event) => {
+                      setCvvNumber(event.target.value);
+                    }}
                   />
-                  {errors.cvv && (
-                    <div className="invalid-feedback">{errors.cvv}</div>
-                  )}
                 </div>
               </div>
-              <button type="submit" className="btn btn-success w-100">
-                {loading ? (
-                  <div className="spinner-border text-light" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                  </div>
-                ) : (
-                  <i className="fas fa-check-circle me-2"></i>
-                )}
+              <button
+                type="submit"
+                className="btn btn-success w-100"
+                onClick={(event) => {
+                  HandelProducts(event);
+                }}
+              >
                 Complete Payment
               </button>
             </form>
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

@@ -18,9 +18,9 @@ function ProductDetail() {
     if (!currentUser) {
       toast.error("Please log in to add items to the cart.");
     } else {
-      const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+      const cartItems = JSON.parse(localStorage.getItem("product")) || [];
       const updatedCart = [...cartItems, selectedProduct];
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      localStorage.setItem("product", JSON.stringify(updatedCart));
       toast.success(
         `Product "${selectedProduct.title.slice(0,10)}" has been successfully added to your cart!`
       );
@@ -137,7 +137,6 @@ function ProductDetail() {
           </div>
         )}
       </div>
-      <Footer />
       <Footer />
       <Toaster position="top-center" reverseOrder={false} />
     </>
