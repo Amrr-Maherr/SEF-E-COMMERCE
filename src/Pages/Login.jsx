@@ -1,54 +1,78 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // استيراد FontAwesomeIcon
+import { faGoogle } from "@fortawesome/free-brands-svg-icons"; // استيراد أيقونة جوجل
 import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
-import {useEffect, useRef} from "react";
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { GoogleLogin } from "@react-oauth/google"; // استيراد GoogleLogin
+
 function Login() {
   const handleForm = (e) => {
-    e.preventDefault(); // هنا بنوقف الإجراء الافتراضي علشان نتعامل مع البيانات يدويًا
+    e.preventDefault();
   };
 
   const EmailInput = useRef();
   const PasswordInput = useRef();
-  const navigate = useNavigate(); // يمكن استخدامه للتوجيه إلى صفحة أخرى بعد تسجيل الدخول
+  const navigate = useNavigate();
 
-const handelLogin = () => {
-  const UserInfo = JSON.parse(localStorage.getItem("UserInfo"));
-  const Email = EmailInput.current.value;
-  const Password = PasswordInput.current.value;
+  const handelLogin = () => {
+    const UserInfo = JSON.parse(localStorage.getItem("UserInfo"));
+    const Email = EmailInput.current.value;
+    const Password = PasswordInput.current.value;
 
-  if (UserInfo) {
-    // التحقق من أن البريد الإلكتروني وكلمة المرور صحيحين
-    if (Email === UserInfo.Email && Password === UserInfo.PasswordInput) {
-      Swal.fire({
-        title: "Success!",
-        text: "You have logged in successfully.",
-        icon: "success",
-        confirmButtonText: "OK",
-      })
-      setTimeout(() => {
+    if (UserInfo) {
+      if (Email === UserInfo.Email && Password === UserInfo.PasswordInput) {
+        Swal.fire({
+          title: "Success!",
+          text: "You have logged in successfully.",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+        setTimeout(() => {
           navigate("/");
-        },1000)
+        }, 1000);
+      } else {
+        Swal.fire({
+          title: "Error!",
+          text: "Incorrect email or password.",
+          icon: "error",
+          confirmButtonText: "Try Again",
+        });
+      }
     } else {
       Swal.fire({
         title: "Error!",
-        text: "Incorrect email or password.",
+        text: "User not found.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
+  };
+
+  const handleGoogleLogin = (response) => {
+    if (response?.credential) {
+      // يمكنك تخزين البيانات في LocalStorage أو إرسالها إلى خادمك
+      Swal.fire({
+        title: "Google Login",
+        text: "You have logged in with Google.",
+        icon: "success",
+      });
+      navigate("/");
+    } else {
+      Swal.fire({
+        title: "Error!",
+        text: "Google login failed.",
         icon: "error",
         confirmButtonText: "Try Again",
       });
     }
-  } else {
-    Swal.fire({
-      title: "Error!",
-      text: "User not found.",
-      icon: "error",
-      confirmButtonText: "OK",
-    });
-  }
-};
+  };
+
   useEffect(() => {
-  EmailInput.current.value = ""
-  PasswordInput.current.value = ""
-},[])
+    EmailInput.current.value = "";
+    PasswordInput.current.value = "";
+  }, []);
+
   return (
     <div className="login-container p-4 vh-100 d-flex align-items-center justify-content-center shadow-lg rounded">
       <div className="container">
@@ -64,7 +88,7 @@ const handelLogin = () => {
         <form
           className="mx-auto"
           style={{ maxWidth: "400px" }}
-          onSubmit={(e) => handleForm(e)} // استخدمنا onSubmit بدلاً من onChange هنا
+          onSubmit={(e) => handleForm(e)}
         >
           <div className="form-group mb-4">
             <input
@@ -112,7 +136,7 @@ const handelLogin = () => {
             initial={{ x: "-100vw" }}
             animate={{ x: 0 }}
             transition={{ duration: 0.8 }}
-            type="submit" // هنا استخدمنا type="submit" علشان يتم إرسال البيانات لما يتم الضغط على الزر
+            type="submit"
             className="btn btn-primary w-100 mb-3"
             style={{
               padding: "12px 0",
@@ -125,6 +149,19 @@ const handelLogin = () => {
           >
             Login
           </motion.button>
+          <div className="d-flex justify-content-center">
+            <GoogleLogin
+              onSuccess={handleGoogleLogin}
+              onError={() =>
+                Swal.fire({
+                  title: "Error!",
+                  text: "Google login failed.",
+                  icon: "error",
+                  confirmButtonText: "Try Again",
+                })
+              }
+            />
+          </div>
         </form>
         <p className="mt-4 text-center" style={{ fontSize: "16px" }}>
           Don't have an account?{" "}

@@ -16,6 +16,7 @@ import PageNotFound from "./Pages/PageNotFound.jsx";
 import SingleProduct from "./Pages/SingleProduct.jsx";
 import FavoriteProducts from "./Pages/FavoriteProducts.jsx";
 import ThankYouPage from "./Pages/ThankYouPage.jsx";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 
 
@@ -24,9 +25,16 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/login"
+            element={
+              <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
+                <Login />
+              </GoogleOAuthProvider>
+            }
+          />
           <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Home />}/>
+          <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
